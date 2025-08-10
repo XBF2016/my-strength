@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steve Mask - 创业战略驾驶舱</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2d5a87;
+            --accent-color: #3182ce;
+            --success-color: #38a169;
+            --warning-color: #d69e2e;
+            --danger-color: #e53e3e;
+            --light-gray: #f7fafc;
+            --medium-gray: #edf2f7;
+            --dark-gray: #4a5568;
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --card-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            --card-hover-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Section */
+        .hero-section {
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .hero-meta {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+        }
+
+        /* Main Grid Layout */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr 320px;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .card:hover {
+            box-shadow: var(--card-hover-shadow);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            padding: 20px;
+            border-bottom: 2px solid var(--medium-gray);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        /* Strengths Section */
+        .strengths-list {
+            list-style: none;
+        }
+
+        .strength-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .strength-item:hover {
+            background: var(--light-gray);
+            transform: translateX(5px);
+        }
+
+        .strength-rank {
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-right: 12px;
+        }
+
+        .strength-icon {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-right: 10px;
+            min-width: 20px;
+        }
+
+        .strength-details h4 {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 2px;
+        }
+
+        .strength-details p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            background: var(--primary-color);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            z-index: 1000;
+        }
+
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--primary-color) transparent transparent transparent;
+        }
+
+        .strength-item:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Value Engines Section */
+        .value-engines {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .value-engine {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-engine::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(45deg);
+        }
+
+        .value-engine-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .value-engine-icon {
+            font-size: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .value-engine h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .value-engine-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .components {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .component {
+            background: rgba(255,255,255,0.2);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Strategy Path Section */
+        .strategy-phases {
+            display: grid;
+            gap: 15px;
+        }
+
+        .phase {
+            background: var(--light-gray);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .phase-icon {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+        }
+
+        .phase h4 {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Business Models */
+        .business-models {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .business-model {
+            background: white;
+            border: 2px solid var(--medium-gray);
+            padding: 15px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .business-model:hover {
+            border-color: var(--accent-color);
+            background: var(--light-gray);
+        }
+
+        .model-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .model-icon {
+            color: var(--success-color);
+            font-size: 1.2rem;
+        }
+
+        /* Action Plan Section */
+        .action-plan-90 {
+            margin-bottom: 25px;
+        }
+
+        .accordion-item {
+            border: 1px solid var(--medium-gray);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background: var(--light-gray);
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.2s ease;
+        }
+
+        .accordion-header:hover {
+            background: var(--medium-gray);
+        }
+
+        .accordion-header.active {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .accordion-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .accordion-content {
+            padding: 0 15px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .accordion-content.active {
+            padding: 15px;
+            max-height: 200px;
+        }
+
+        /* Blind Spots Section */
+        .blind-spots {
+            display: grid;
+            gap: 12px;
+        }
+
+        .blind-spot {
+            background: #fff5f5;
+            border: 1px solid #feb2b2;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .blind-spot-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .blind-spot-icon {
+            color: var(--danger-color);
+            font-size: 1.1rem;
+        }
+
+        .blind-spot h4 {
+            color: var(--danger-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .countermeasure {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+            padding-left: 25px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .main-grid {
+                grid-template-columns: 300px 1fr 280px;
+                gap: 20px;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .hero-section {
+                padding: 30px 20px;
+            }
+            
+            .hero-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 1.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .card-content,
+            .card-header {
+                padding: 15px;
+            }
+            
+            .strength-item {
+                padding: 10px;
+            }
+            
+            .value-engine {
+                padding: 20px;
+            }
+            
+            .value-engine-icon {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1 class="hero-title">史蒂夫·马斯克 (Steve Mask) 的创业战略蓝图</h1>
+            <p class="hero-subtitle">核心定位：B2B 定制化解决方案专家</p>
+            <p class="hero-meta">基于盖洛普优势报告 (2025-04-13) 的深度洞察</p>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <!-- Left Column: Strengths -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-crown"></i>
+                        我的天赋基石：TOP 10 优势才干
+                    </h2>
+                </div>
+                <div class="card-content">
+                    <ol class="strengths-list">
+                        <li class="strength-item" data-tooltip="Relator: Enjoy close relationships with others">
+                            <div class="strength-rank">1</div>
+                            <i class="fas fa-handshake strength-icon"></i>
+                            <div class="strength-details">
+                                <h4>交际 (Relator)</h4>
+                                <p>享受与他人建立深度、亲密的伙伴关系</p>
+                            </div>
+                            <div class="tooltip">Relator: Enjoy close relationships with others</div>
+                        </li>
+                        <li class="strength-item" data-tooltip="Harmony: Look for consensus and areas of agreement">
+                            <div class="strength-rank">2</div>
+                            <i class="fas fa-balance-scale strength-icon"></i>
+                            <div class="strength-details">
+                                <h4>和谐 (Harmony)</h4>
+                                <p>寻求共识，在不同意见中找到一致的解决方案</p>
+                            </div>
+                            <div class="tooltip">Harmony: Look for consensus and areas of agreement</div>
+                        </li>
+                        <li class="strength-item" data-tooltip="Competition: Measure your progress against others">
+                            <div class="strength-rank">3</div>
+                            <i class="fas fa-trophy strength-icon"></i>
+                            <div class="strength-details">
+                                <h4>竞争 (Competition)</h4>
+                                <p>衡量并超越他人，在竞赛中追求第一</p>
+                            </div>
+                            <div class="tooltip">Competition: Measure your progress against others</div>
+                        </li>
+                        <li class="strength-item" data-tooltip="Restorative: Love to solve problems and fix what's broken">
+                            <div class="strength-rank">4</div>
+                            <i class="fas fa-tools strength-icon"></i>
+                            <div class="strength-details">
+                                <h4>排难 (Restorative)</h4>
+                                <p>热爱解决复杂问题，诊断并修复系统的缺陷</p>
+                            </div>
+                            <div class="tooltip">Restorative: Love to solve problems and fix what's broken</div>
+                        </li>
+                        <li class="strength-item" data-tooltip="Deliberative: Carefully consider choices and decisions">
+                            <div class="strength-rank">5</div>
+                            <i class="fas fa-chess strength-icon"></i>
+                            <div class="strength-details">
+                                <h4>审慎 (Deliberative)</h4>
+                                <p>决策时认真、周全，能预见并规避风险</p>
+                            </div>
+                            <div class="tooltip">Deliberative: Carefully consider choices and decisions</div>
+                        </li>
+                        <li class="strength-item" data-tooltip="Empathy: Understand others' feelings and perspectives">
+                            <div class="strength-rank">6</div>
+                            <i class="fas fa-heart strength-icon"></i>
+                            <div class="strength-details">
+                                <h4>体谅 (Empathy)</h4>
+                                <p>能敏锐感知他人感受，理解弦外之音</p>
+                            </div>
+                            <div class="tooltip">Empathy: Understand others' feelings and perspectives</div>
+                        </li>
+                        <li class="strength-item" data-tooltip="Significance: Want to make a meaningful contribution">
+                            <div class="strength-rank">7</div>
+                            <i class="fas fa-star strength-icon"></i>
+                            <div class="strength-details">
+                                <h4>重才 (Significance)</h4>
+                                <p>渴望做出被认可的、有重大影响力的贡献</p>
+                            </div>
+                            <div class="tooltip">Significance: Want to make a meaningful contribution</div>
+                        </li>
+                        <li class="strength-item" data-tooltip="Adaptability: Go with the flow and adjust as needed">
+                            <div class="strength-rank">8</div>
+                            <i class="fas fa-water strength-icon"></i>
+                            <div class="strength-details">
+                                <h4>适应 (Adaptability)</h4>
+                                <p>灵活应对变化，享受活在当下的高效</p>
+                            </div>
+                            <div class="tooltip">Adaptability: Go with the flow and adjust as needed</div>
+                        </li>
+                        <li class="strength-item" data-tooltip="Developer: Recognize and develop others' potential">
+                            <div class="strength-rank">9</div>
+                            <i class="fas fa-seedling strength-icon"></i>
+                            <div class="strength-details">
+                                <h4>伯乐 (Developer)</h4>
+                                <p>善于发现并培养他人的潜能，为进步而喜悦</p>
+                            </div>
+                            <div class="tooltip">Developer: Recognize and develop others' potential</div>
+                        </li>
+                        <li class="strength-item" data-tooltip="Learner: Love to learn and improve continuously">
+                            <div class="strength-rank">10</div>
+                            <i class="fas fa-graduation-cap strength-icon"></i>
+                            <div class="strength-details">
+                                <h4>学习 (Learner)</h4>
+                                <p>享受学习过程本身，对新知识充满渴望</p>
+                            </div>
+                            <div class="tooltip">Learner: Love to learn and improve continuously</div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Middle Column: Value Engines & Strategy -->
+            <div>
+                <!-- Value Engines -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <i class="fas fa-cogs"></i>
+                            我的优势组合效应：三大价值引擎
+                        </h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="value-engines">
+                            <div class="value-engine">
+                                <div class="value-engine-header">
+                                    <i class="fas fa-shield-alt value-engine-icon"></i>
+                                    <div>
+                                        <h3>信任三角 (The Trust Triangle)</h3>
+                                    </div>
+                                </div>
+                                <div class="value-engine-content">
+                                    <div class="components">
+                                        <span class="component">交际</span>
+                                        <span class="component">审慎</span>
+                                        <span class="component">和谐</span>
+                                    </div>
+                                    <p><strong>商业价值：</strong>这个组合让我能与 B2B 客户建立<strong>真诚、深度且稳固的信任</strong>。客户视我为可靠的长期伙伴，而非一次性卖家。</p>
+                                </div>
+                            </div>
+
+                            <div class="value-engine">
+                                <div class="value-engine-header">
+                                    <i class="fas fa-rocket value-engine-icon"></i>
+                                    <div>
+                                        <h3>价值引擎 (The Value Engine)</h3>
+                                    </div>
+                                </div>
+                                <div class="value-engine-content">
+                                    <div class="components">
+                                        <span class="component">排难</span>
+                                        <span class="component">学习</span>
+                                        <span class="component">适应</span>
+                                    </div>
+                                    <p><strong>商业价值：</strong>这个组合让我成为完美的<strong>问题解决者</strong>。我能诊断、学习并灵活地攻克客户最棘手的难题，交付真正的商业价值。</p>
+                                </div>
+                            </div>
+
+                            <div class="value-engine">
+                                <div class="value-engine-header">
+                                    <i class="fas fa-fire value-engine-icon"></i>
+                                    <div>
+                                        <h3>驱动双翼 (The Drive Wings)</h3>
+                                    </div>
+                                </div>
+                                <div class="value-engine-content">
+                                    <div class="components">
+                                        <span class="component">竞争</span>
+                                        <span class="component">重才</span>
+                                    </div>
+                                    <p><strong>商业价值：</strong>这个组合为我提供了<strong>追求卓越的强大动力</strong>。我不仅要完成，更要成为细分领域的第一，打造标杆案例。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategy Path -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <i class="fas fa-route"></i>
+                            我的战略路径图：从定制到产品化
+                        </h2>
+                    </div>
+                    <div class="card-content">
+                        <div style="background: #e6fffa; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169; margin-bottom: 20px;">
+                            <strong>核心原则：80% 模块化 + 20% 定制化</strong>
+                        </div>
+                        
+                        <div class="strategy-phases">
+                            <div class="phase">
+                                <div class="phase-header">
+                                    <i class="fas fa-play phase-icon"></i>
+                                    <h4>启动期 (Launch)</h4>
+                                </div>
+                                <p>承接纯定制项目，深度服务，打造完美口碑。</p>
+                            </div>
+
+                            <div class="phase">
+                                <div class="phase-header">
+                                    <i class="fas fa-chart-line phase-icon"></i>
+                                    <h4>成长期 (Grow)</h4>
+                                </div>
+                                <p>在交付中沉淀可复用的模块、流程与工具。</p>
+                            </div>
+
+                            <div class="phase">
+                                <div class="phase-header">
+                                    <i class="fas fa-expand-arrows-alt phase-icon"></i>
+                                    <h4>成熟期 (Scale)</h4>
+                                </div>
+                                <p>将模块打包成标准化的服务套餐，提升效率与利润。</p>
+                            </div>
+                        </div>
+
+                        <div class="business-models">
+                            <h3 style="margin-bottom: 15px; color: var(--primary-color);">
+                                <i class="fas fa-lightbulb"></i> 最佳商业模式
+                            </h3>
+                            
+                            <div class="business-model">
+                                <div class="model-header">
+                                    <i class="fas fa-cloud model-icon"></i>
+                                    <h4>SaaS + 深度服务</h4>
+                                </div>
+                                <p>软件是载体，核心价值在咨询与客户成功。</p>
+                            </div>
+
+                            <div class="business-model">
+                                <div class="model-header">
+                                    <i class="fas fa-puzzle-piece model-icon"></i>
+                                    <h4>产品化咨询</h4>
+                                </div>
+                                <p>将专业知识打包成有明确范围和价格的解决方案。</p>
+                            </div>
+
+                            <div class="business-model">
+                                <div class="model-header">
+                                    <i class="fas fa-hands-helping model-icon"></i>
+                                    <h4>专家外包/托管服务 (MSP)</h4>
+                                </div>
+                                <p>为企业提供持续的、按月付费的专家服务。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Action Plan & Blind Spots -->
+            <div>
+                <!-- 90 Day Plan -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <i class="fas fa-calendar-alt"></i>
+                            90天启动计划
+                        </h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="action-plan-90">
+                            <div class="accordion-item">
+                                <div class="accordion-header" onclick="toggleAccordion(0)">
+                                    <div class="accordion-title">
+                                        <i class="fas fa-search"></i>
+                                        <span>1-4周: 定义问题，验证需求</span>
+                                    </div>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>深度调研目标市场，识别核心痛点，验证解决方案的市场需求，明确价值主张。</p>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <div class="accordion-header" onclick="toggleAccordion(1)">
+                                    <div class="accordion-title">
+                                        <i class="fas fa-handshake"></i>
+                                        <span>5-8周: 签署试点，交付价值</span>
+                                    </div>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>与首批客户签署试点项目，专注于超预期交付，建立初期成功案例和客户见证。</p>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <div class="accordion-header" onclick="toggleAccordion(2)">
+                                    <div class="accordion-title">
+                                        <i class="fas fa-chart-bar"></i>
+                                        <span>9-12周: 复盘沉淀，打造案例</span>
+                                    </div>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>总结项目经验，提炼可复用方法论，制作标杆案例，为规模化扩展做准备。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blind Spots -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            盲区与对策
+                        </h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="blind-spots">
+                            <div class="blind-spot">
+                                <div class="blind-spot-header">
+                                    <i class="fas fa-clock blind-spot-icon"></i>
+                                    <h4>决策迟缓 (审慎)</h4>
+                                </div>
+                                <div class="countermeasure">
+                                    <strong>对策：</strong>设定决策时限，拥抱"最小可行选择"。
+                                </div>
+                            </div>
+
+                            <div class="blind-spot">
+                                <div class="blind-spot-header">
+                                    <i class="fas fa-dove blind-spot-icon"></i>
+                                    <h4>回避冲突 (和谐)</h4>
+                                </div>
+                                <div class="countermeasure">
+                                    <strong>对策：</strong>将分歧"议题化"，用方案 A/B 让客户做选择题。
+                                </div>
+                            </div>
+
+                            <div class="blind-spot">
+                                <div class="blind-spot-header">
+                                    <i class="fas fa-heart-broken blind-spot-icon"></i>
+                                    <h4>过度服务 (排难)</h4>
+                                </div>
+                                <div class="countermeasure">
+                                    <strong>对策：</strong>坚决执行工作说明书(SoW)，捍卫项目边界。
+                                </div>
+                            </div>
+
+                            <div class="blind-spot">
+                                <div class="blind-spot-header">
+                                    <i class="fas fa-volume-mute blind-spot-icon"></i>
+                                    <h4>影响力弱 (取悦/沟通偏低)</h4>
+                                </div>
+                                <div class="countermeasure">
+                                    <strong>对策：</strong>让数据和客户为你说话，用案例和口碑代替自我宣传。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleAccordion(index) {
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            const accordionContents = document.querySelectorAll('.accordion-content');
+            
+            const currentHeader = accordionHeaders[index];
+            const currentContent = accordionContents[index];
+            const currentChevron = currentHeader.querySelector('.fas.fa-chevron-down, .fas.fa-chevron-up');
+            
+            // Close all other accordions
+            accordionHeaders.forEach((header, i) => {
+                if (i !== index) {
+                    header.classList.remove('active');
+                    accordionContents[i].classList.remove('active');
+                    const chevron = header.querySelector('.fas.fa-chevron-down, .fas.fa-chevron-up');
+                    chevron.className = 'fas fa-chevron-down';
+                }
+            });
+            
+            // Toggle current accordion
+            if (currentHeader.classList.contains('active')) {
+                currentHeader.classList.remove('active');
+                currentContent.classList.remove('active');
+                currentChevron.className = 'fas fa-chevron-down';
+            } else {
+                currentHeader.classList.add('active');
+                currentContent.classList.add('active');
+                currentChevron.className = 'fas fa-chevron-up';
+            }
+        }
+
+        // Add smooth scroll behavior
+        document.documentElement.style.scrollBehavior = 'smooth';
+
+        // Optional: Add some entrance animations
+        window.addEventListener('load', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(30px)';
+                    card.style.transition = 'all 0.6s ease';
+                    
+                    requestAnimationFrame(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    });
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
