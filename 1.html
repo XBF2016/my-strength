@@ -50,6 +50,38 @@
             padding: 20px;
         }
 
+        /* Print Styles */
+        @media print {
+            body {
+                background: white !important;
+                font-size: 12px;
+            }
+            
+            .hero-section {
+                background: #f0f0f0 !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            
+            .card {
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+                break-inside: avoid;
+                margin-bottom: 15px;
+            }
+            
+            .value-engine {
+                background: #f0f0f0 !important;
+                color: black !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+
         /* Header Section */
         .hero-section {
             text-align: center;
@@ -181,38 +213,11 @@
             line-height: 1.4;
         }
 
-        /* Tooltip */
-        .tooltip {
-            position: absolute;
-            background: var(--primary-color);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
-            z-index: 1000;
-        }
-
-        .tooltip::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: var(--primary-color) transparent transparent transparent;
-        }
-
-        .strength-item:hover .tooltip {
-            opacity: 1;
-            visibility: visible;
+        .strength-english {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-top: 2px;
         }
 
         /* Value Engines Section */
@@ -343,54 +348,38 @@
             font-size: 1.2rem;
         }
 
-        /* Action Plan Section */
+        /* Action Plan Section - 移除手风琴效果 */
         .action-plan-90 {
             margin-bottom: 25px;
         }
 
-        .accordion-item {
+        .plan-item {
+            background: var(--light-gray);
             border: 1px solid var(--medium-gray);
             border-radius: 8px;
-            margin-bottom: 8px;
+            margin-bottom: 15px;
             overflow: hidden;
         }
 
-        .accordion-header {
-            background: var(--light-gray);
-            padding: 15px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: background 0.2s ease;
-        }
-
-        .accordion-header:hover {
-            background: var(--medium-gray);
-        }
-
-        .accordion-header.active {
+        .plan-header {
             background: var(--accent-color);
             color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .accordion-title {
+        .plan-title {
             display: flex;
             align-items: center;
             gap: 10px;
             font-weight: 600;
         }
 
-        .accordion-content {
-            padding: 0 15px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-        }
-
-        .accordion-content.active {
+        .plan-content {
             padding: 15px;
-            max-height: 200px;
+            background: white;
         }
 
         /* Blind Spots Section */
@@ -511,95 +500,95 @@
                 </div>
                 <div class="card-content">
                     <ol class="strengths-list">
-                        <li class="strength-item" data-tooltip="Relator: Enjoy close relationships with others">
+                        <li class="strength-item">
                             <div class="strength-rank">1</div>
                             <i class="fas fa-handshake strength-icon"></i>
                             <div class="strength-details">
                                 <h4>交际 (Relator)</h4>
                                 <p>享受与他人建立深度、亲密的伙伴关系</p>
+                                <div class="strength-english">Enjoy close relationships with others</div>
                             </div>
-                            <div class="tooltip">Relator: Enjoy close relationships with others</div>
                         </li>
-                        <li class="strength-item" data-tooltip="Harmony: Look for consensus and areas of agreement">
+                        <li class="strength-item">
                             <div class="strength-rank">2</div>
                             <i class="fas fa-balance-scale strength-icon"></i>
                             <div class="strength-details">
                                 <h4>和谐 (Harmony)</h4>
                                 <p>寻求共识，在不同意见中找到一致的解决方案</p>
+                                <div class="strength-english">Look for consensus and areas of agreement</div>
                             </div>
-                            <div class="tooltip">Harmony: Look for consensus and areas of agreement</div>
                         </li>
-                        <li class="strength-item" data-tooltip="Competition: Measure your progress against others">
+                        <li class="strength-item">
                             <div class="strength-rank">3</div>
                             <i class="fas fa-trophy strength-icon"></i>
                             <div class="strength-details">
                                 <h4>竞争 (Competition)</h4>
                                 <p>衡量并超越他人，在竞赛中追求第一</p>
+                                <div class="strength-english">Measure your progress against others</div>
                             </div>
-                            <div class="tooltip">Competition: Measure your progress against others</div>
                         </li>
-                        <li class="strength-item" data-tooltip="Restorative: Love to solve problems and fix what's broken">
+                        <li class="strength-item">
                             <div class="strength-rank">4</div>
                             <i class="fas fa-tools strength-icon"></i>
                             <div class="strength-details">
                                 <h4>排难 (Restorative)</h4>
                                 <p>热爱解决复杂问题，诊断并修复系统的缺陷</p>
+                                <div class="strength-english">Love to solve problems and fix what's broken</div>
                             </div>
-                            <div class="tooltip">Restorative: Love to solve problems and fix what's broken</div>
                         </li>
-                        <li class="strength-item" data-tooltip="Deliberative: Carefully consider choices and decisions">
+                        <li class="strength-item">
                             <div class="strength-rank">5</div>
                             <i class="fas fa-chess strength-icon"></i>
                             <div class="strength-details">
                                 <h4>审慎 (Deliberative)</h4>
                                 <p>决策时认真、周全，能预见并规避风险</p>
+                                <div class="strength-english">Carefully consider choices and decisions</div>
                             </div>
-                            <div class="tooltip">Deliberative: Carefully consider choices and decisions</div>
                         </li>
-                        <li class="strength-item" data-tooltip="Empathy: Understand others' feelings and perspectives">
+                        <li class="strength-item">
                             <div class="strength-rank">6</div>
                             <i class="fas fa-heart strength-icon"></i>
                             <div class="strength-details">
                                 <h4>体谅 (Empathy)</h4>
                                 <p>能敏锐感知他人感受，理解弦外之音</p>
+                                <div class="strength-english">Understand others' feelings and perspectives</div>
                             </div>
-                            <div class="tooltip">Empathy: Understand others' feelings and perspectives</div>
                         </li>
-                        <li class="strength-item" data-tooltip="Significance: Want to make a meaningful contribution">
+                        <li class="strength-item">
                             <div class="strength-rank">7</div>
                             <i class="fas fa-star strength-icon"></i>
                             <div class="strength-details">
                                 <h4>重才 (Significance)</h4>
                                 <p>渴望做出被认可的、有重大影响力的贡献</p>
+                                <div class="strength-english">Want to make a meaningful contribution</div>
                             </div>
-                            <div class="tooltip">Significance: Want to make a meaningful contribution</div>
                         </li>
-                        <li class="strength-item" data-tooltip="Adaptability: Go with the flow and adjust as needed">
+                        <li class="strength-item">
                             <div class="strength-rank">8</div>
                             <i class="fas fa-water strength-icon"></i>
                             <div class="strength-details">
                                 <h4>适应 (Adaptability)</h4>
                                 <p>灵活应对变化，享受活在当下的高效</p>
+                                <div class="strength-english">Go with the flow and adjust as needed</div>
                             </div>
-                            <div class="tooltip">Adaptability: Go with the flow and adjust as needed</div>
                         </li>
-                        <li class="strength-item" data-tooltip="Developer: Recognize and develop others' potential">
+                        <li class="strength-item">
                             <div class="strength-rank">9</div>
                             <i class="fas fa-seedling strength-icon"></i>
                             <div class="strength-details">
                                 <h4>伯乐 (Developer)</h4>
                                 <p>善于发现并培养他人的潜能，为进步而喜悦</p>
+                                <div class="strength-english">Recognize and develop others' potential</div>
                             </div>
-                            <div class="tooltip">Developer: Recognize and develop others' potential</div>
                         </li>
-                        <li class="strength-item" data-tooltip="Learner: Love to learn and improve continuously">
+                        <li class="strength-item">
                             <div class="strength-rank">10</div>
                             <i class="fas fa-graduation-cap strength-icon"></i>
                             <div class="strength-details">
                                 <h4>学习 (Learner)</h4>
                                 <p>享受学习过程本身，对新知识充满渴望</p>
+                                <div class="strength-english">Love to learn and improve continuously</div>
                             </div>
-                            <div class="tooltip">Learner: Love to learn and improve continuously</div>
                         </li>
                     </ol>
                 </div>
@@ -744,7 +733,7 @@
 
             <!-- Right Column: Action Plan & Blind Spots -->
             <div>
-                <!-- 90 Day Plan -->
+                <!-- 90 Day Plan - 移除手风琴效果，直接显示所有内容 -->
                 <div class="card">
                     <div class="card-header">
                         <h2 class="card-title">
@@ -754,41 +743,38 @@
                     </div>
                     <div class="card-content">
                         <div class="action-plan-90">
-                            <div class="accordion-item">
-                                <div class="accordion-header" onclick="toggleAccordion(0)">
-                                    <div class="accordion-title">
+                            <div class="plan-item">
+                                <div class="plan-header">
+                                    <div class="plan-title">
                                         <i class="fas fa-search"></i>
                                         <span>1-4周: 定义问题，验证需求</span>
                                     </div>
-                                    <i class="fas fa-chevron-down"></i>
                                 </div>
-                                <div class="accordion-content">
+                                <div class="plan-content">
                                     <p>深度调研目标市场，识别核心痛点，验证解决方案的市场需求，明确价值主张。</p>
                                 </div>
                             </div>
 
-                            <div class="accordion-item">
-                                <div class="accordion-header" onclick="toggleAccordion(1)">
-                                    <div class="accordion-title">
+                            <div class="plan-item">
+                                <div class="plan-header">
+                                    <div class="plan-title">
                                         <i class="fas fa-handshake"></i>
                                         <span>5-8周: 签署试点，交付价值</span>
                                     </div>
-                                    <i class="fas fa-chevron-down"></i>
                                 </div>
-                                <div class="accordion-content">
+                                <div class="plan-content">
                                     <p>与首批客户签署试点项目，专注于超预期交付，建立初期成功案例和客户见证。</p>
                                 </div>
                             </div>
 
-                            <div class="accordion-item">
-                                <div class="accordion-header" onclick="toggleAccordion(2)">
-                                    <div class="accordion-title">
+                            <div class="plan-item">
+                                <div class="plan-header">
+                                    <div class="plan-title">
                                         <i class="fas fa-chart-bar"></i>
                                         <span>9-12周: 复盘沉淀，打造案例</span>
                                     </div>
-                                    <i class="fas fa-chevron-down"></i>
                                 </div>
-                                <div class="accordion-content">
+                                <div class="plan-content">
                                     <p>总结项目经验，提炼可复用方法论，制作标杆案例，为规模化扩展做准备。</p>
                                 </div>
                             </div>
@@ -850,44 +836,14 @@
                 </div>
             </div>
         </div>
-        </div>
     </div>
 
     <script>
-        function toggleAccordion(index) {
-            const accordionHeaders = document.querySelectorAll('.accordion-header');
-            const accordionContents = document.querySelectorAll('.accordion-content');
-            
-            const currentHeader = accordionHeaders[index];
-            const currentContent = accordionContents[index];
-            const currentChevron = currentHeader.querySelector('.fas.fa-chevron-down, .fas.fa-chevron-up');
-            
-            // Close all other accordions
-            accordionHeaders.forEach((header, i) => {
-                if (i !== index) {
-                    header.classList.remove('active');
-                    accordionContents[i].classList.remove('active');
-                    const chevron = header.querySelector('.fas.fa-chevron-down, .fas.fa-chevron-up');
-                    chevron.className = 'fas fa-chevron-down';
-                }
-            });
-            
-            // Toggle current accordion
-            if (currentHeader.classList.contains('active')) {
-                currentHeader.classList.remove('active');
-                currentContent.classList.remove('active');
-                currentChevron.className = 'fas fa-chevron-down';
-            } else {
-                currentHeader.classList.add('active');
-                currentContent.classList.add('active');
-                currentChevron.className = 'fas fa-chevron-up';
-            }
-        }
-
+        // 移除所有交互功能，保持页面静态
         // Add smooth scroll behavior
         document.documentElement.style.scrollBehavior = 'smooth';
 
-        // Optional: Add some entrance animations
+        // Optional: Add some entrance animations for screen viewing
         window.addEventListener('load', function() {
             const cards = document.querySelectorAll('.card');
             cards.forEach((card, index) => {
