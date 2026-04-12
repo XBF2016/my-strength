@@ -1,0 +1,4 @@
+interface:
+  display_name: "口述材料整理"
+  short_description: "把口述、转写和回忆性描述整理成忠实、低解释的结构化材料"
+  default_prompt: "Use $structure-oral-material to turn my spoken narration into faithful, structured source material without adding extra interpretation."
