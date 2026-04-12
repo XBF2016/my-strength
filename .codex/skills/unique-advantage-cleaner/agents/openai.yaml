@@ -1,0 +1,4 @@
+interface:
+  display_name: "独特优势清理"
+  short_description: "列出并清理你的独特优势案例和假设线索。"
+  default_prompt: "请使用 $unique-advantage-cleaner 列出我当前保存的案例，并按我的选择删除部分或全部内容。"
