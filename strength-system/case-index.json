@@ -1,10 +1,10 @@
 {
   "version": 3,
-  "generated_at": "2026-04-12T13:02:26.360062+00:00",
+  "generated_at": "2026-04-12T13:10:10.632637+00:00",
   "source": "D:/GitProjects/xiebaofa/my-strength/strength-system",
   "counts": {
     "formal": 1,
-    "hypothesis": 0
+    "hypothesis": 1
   },
   "formal_cases": [
     {
@@ -20,5 +20,13 @@
       "judgment": "possible signal"
     }
   ],
-  "hypothesis_notes": []
+  "hypothesis_notes": [
+    {
+      "id": "hypothesis:001",
+      "title": "偏好整顿产品流程与文档秩序",
+      "path": "hypotheses/001.md",
+      "date": "2026-04-12",
+      "status": "假设线索"
+    }
+  ]
 }
