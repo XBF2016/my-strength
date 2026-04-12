@@ -1,0 +1,4 @@
+interface:
+  display_name: "Unique Advantage Explorer"
+  short_description: "Explore a case first, then decide if it is ready to archive."
+  default_prompt: "Use $unique-advantage-explorer to help me talk through a new case before deciding whether to record it."
