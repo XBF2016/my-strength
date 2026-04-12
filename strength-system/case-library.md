@@ -1,4 +1,4 @@
-# 独特优势案例库
+# 独特优势案例总览
 
 ## 固定定义
 
@@ -8,50 +8,19 @@
 2. 学习速度更快
 3. 做得更好且有外部验证
 
-## 记录模板
+## 数据层
 
-```markdown
-## 正式案例 00X - 案例标题
+- 正式案例源目录: `strength-system/cases/`
+- 假设线索源目录: `strength-system/hypotheses/`
+- 复盘记录文件: `strength-system/reviews.md`
+- 生成索引: `strength-system/case-index.json`
+- 生成人类总览: `strength-system/case-library.md`
 
-- 日期: YYYY-MM-DD
-- 来源: 用户口述案例
-- 长期可持续性评分: 0-2
-- 学习速度评分: 0-2
-- 外部验证评分: 0-2
-- 初步判断: strong signal | possible signal | insufficient evidence
+## 正式案例目录
 
-### 事实
+- 正式案例:001 | 接手混乱产品售后并亲自搭建流程 | 日期: 2026-04-12 | 判断: possible signal | 文件: `cases/001.md`
 
-### 长期可持续性信号
-
-### 学习速度信号
-
-### 结果与外部验证
-
-### 备注
-```
-
-## 假设线索模板
-
-```markdown
-## 假设线索 00X - 标题
-
-- 日期: YYYY-MM-DD
-- 来源: 用户口述线索
-- 状态: 假设线索
-
-### 这条线索说明什么
-
-### 为什么还不能算正式证据
-
-### 需要什么证据来升级
-```
-
-## 正式案例区
-
-当前还没有正式记录。
-
-## 假设线索区
+## 假设线索目录
 
 当前还没有假设线索。
 

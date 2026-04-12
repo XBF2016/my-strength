@@ -5,8 +5,14 @@ Use these workspace files to keep the process stable across new threads.
 ## Required Files
 
 - `strength-system/protocol.md`
-- `strength-system/case-library.md`
+- `strength-system/cases/`
+- `strength-system/hypotheses/`
+- `strength-system/reviews.md`
 - `strength-system/case-index.json`
+
+## Optional Generated File
+
+- `strength-system/case-library.md`
 
 ## Protocol File
 
@@ -17,28 +23,13 @@ Use these workspace files to keep the process stable across new threads.
 - the scoring rules
 - a short recommended start prompt
 
-## Case Library File
+## Case Files
 
-`strength-system/case-library.md` should contain:
+Store each formal case as its own Markdown file under `strength-system/cases/`.
 
-- a short header that repeats the three-point definition
-- the record template
-- an `Entries` section where new cases are appended
-- a `Hypothesis Notes` section for low-evidence but useful leads
-- an optional `Review Notes` section for cross-case summaries
+Use filenames like `001.md`, `002.md`, `003.md`.
 
-## Case Index File
-
-`strength-system/case-index.json` is the generated helper index.
-
-- Treat `strength-system/case-library.md` as the source of truth.
-- Rebuild the index after every archive change.
-- Use the index for fast listing, counting, and review overviews.
-- If the index is missing or stale, regenerate it from the library.
-
-## Standard Record Format
-
-Use this exact section structure for each new case:
+Each file should contain exactly one formal case using this structure:
 
 ```markdown
 ## 正式案例 00X - <short title>
@@ -66,9 +57,13 @@ Use this exact section structure for each new case:
 <short caveats, missing evidence, or follow-up items>
 ```
 
-## Hypothesis Note Format
+## Hypothesis Files
 
-Use this structure when the input is mainly speculative or preference-based:
+Store each low-evidence note as its own Markdown file under `strength-system/hypotheses/`.
+
+Use filenames like `001.md`, `002.md`, `003.md`.
+
+Each file should contain exactly one hypothesis note using this structure:
 
 ```markdown
 ## 假设线索 00X - <short title>
@@ -87,9 +82,13 @@ Use this structure when the input is mainly speculative or preference-based:
 <specific future facts worth collecting>
 ```
 
+## Review File
+
+Store cross-case review notes in `strength-system/reviews.md`.
+
 ## Review Format
 
-When the user asks for a periodic review, append a short note under `Review Notes`:
+When the user asks for a periodic review, append a short note to `strength-system/reviews.md`:
 
 ```markdown
 ## Review YYYY-MM-DD
@@ -100,3 +99,22 @@ When the user asks for a periodic review, append a short note under `Review Note
 - Weak or missing evidence:
 - Next cases worth collecting:
 ```
+
+## Case Index File
+
+`strength-system/case-index.json` is the generated helper index.
+
+- Treat `strength-system/cases/`, `strength-system/hypotheses/`, and `strength-system/reviews.md` as the source of truth.
+- Rebuild the index after every archive change.
+- Use the index for fast listing, counting, and review overviews.
+- Keep the index lightweight and summary-only. Prefer storing only compact metadata such as `id`, `title`, `path`, `date`, scores, and judgment or status.
+- Do not duplicate display labels, section labels, or other presentation-only fields in the index.
+- If the index is missing or stale, regenerate it from the source files.
+
+## Generated Overview File
+
+`strength-system/case-library.md` is an optional generated overview for quick human browsing.
+
+- Do not treat it as the source of truth.
+- Regenerate it together with the index after archive changes.
+- If the workspace still uses a legacy single-file archive as the source of truth, migrate it first.

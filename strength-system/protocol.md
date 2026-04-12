@@ -54,19 +54,29 @@
 
 ## 索引规则
 
-这个系统现在有两个数据层：
+这个系统现在有五个数据层：
 
-1. `strength-system/case-library.md`
-这是唯一真相源，所有正式案例和假设线索都以这里为准。
+1. `strength-system/cases/`
+这里存放所有正式案例文件，每个案例一个文件，这是正式案例的真相源。
 
-2. `strength-system/case-index.json`
-这是自动生成的辅助索引，用来加速列表、清理、统计和复盘。
+2. `strength-system/hypotheses/`
+这里存放所有假设线索文件，每条线索一个文件，这是低证据线索的真相源。
+
+3. `strength-system/reviews.md`
+这里存放跨案例复盘记录，这是复盘结论的真相源。
+
+4. `strength-system/case-index.json`
+这是自动生成的辅助索引，用来加速列表、清理、统计和复盘。它应该尽量轻量，只保留定位和摘要所需的信息。
+
+5. `strength-system/case-library.md`
+这是自动生成的人类可读总览，用来快速浏览，不是真相源。
 
 规则是：
 
-- 不允许只改索引、不改主文件。
-- 主文件变化后，必须立即重建索引。
-- 如果索引缺失或过期，必须从主文件重建。
+- 不允许只改索引或总览、不改源文件。
+- `cases/`、`hypotheses/`、`reviews.md` 变化后，必须立即重建索引和总览。
+- 索引应保持摘要化，避免重复存储展示型字段。
+- 如果索引或总览缺失或过期，必须从源文件重建。
 
 ## 三项打分规则
 
@@ -129,4 +139,4 @@
 
 以后新开对话时，推荐直接这样说：
 
-`请使用 $unique-advantage-journal，先读取 strength-system/protocol.md 和 strength-system/case-library.md，然后严格按协议帮我记录接下来的案例。`
+`请使用 $unique-advantage-journal，先读取 strength-system/protocol.md 和 strength-system/case-index.json，如有需要再打开相关 case 文件，然后严格按协议帮我记录接下来的案例。`

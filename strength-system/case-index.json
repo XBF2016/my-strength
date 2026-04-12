@@ -1,11 +1,24 @@
 {
-  "version": 1,
-  "generated_at": "2026-04-12T10:46:30.789259+00:00",
-  "source": "D:/GitProjects/xiebaofa/my-strength/strength-system/case-library.md",
+  "version": 3,
+  "generated_at": "2026-04-12T13:02:26.360062+00:00",
+  "source": "D:/GitProjects/xiebaofa/my-strength/strength-system",
   "counts": {
-    "formal": 0,
+    "formal": 1,
     "hypothesis": 0
   },
-  "formal_cases": [],
+  "formal_cases": [
+    {
+      "id": "case:001",
+      "title": "接手混乱产品售后并亲自搭建流程",
+      "path": "cases/001.md",
+      "date": "2026-04-12",
+      "scores": {
+        "sustainability": 1,
+        "learning_speed": 1,
+        "external_validation": 1
+      },
+      "judgment": "possible signal"
+    }
+  ],
   "hypothesis_notes": []
 }

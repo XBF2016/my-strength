@@ -23,9 +23,11 @@ Do not add extra "core definition" factors. Interest, historical accumulation, c
 
 ## Workspace Files
 
-Read [references/workspace-files.md](references/workspace-files.md) when creating, repairing, or updating the workspace protocol and case library.
+Read [references/workspace-files.md](references/workspace-files.md) when creating, repairing, or updating the workspace protocol and archive.
 
-If the current workspace already contains `strength-system/protocol.md`, `strength-system/case-library.md`, and `strength-system/case-index.json`, read the protocol and use the index as the fast summary before substantive analysis.
+If the current workspace already contains `strength-system/protocol.md`, `strength-system/cases/`, `strength-system/hypotheses/`, `strength-system/reviews.md`, and `strength-system/case-index.json`, read the protocol and use the index as the fast summary before substantive analysis. Open individual case files only when details matter.
+
+If the workspace still uses the legacy single-file archive `strength-system/case-library.md` as the source of truth, migrate it first by running `.codex/skills/unique-advantage-cleaner/scripts/manage_case_library.py migrate-legacy --file strength-system/case-library.md --root strength-system --index strength-system/case-index.json`.
 
 If the files are missing and the user wants to start or continue the system, create them using the standard structure from the reference file.
 
@@ -109,16 +111,17 @@ For hypothesis notes, store them in the separate hypothesis section without form
 
 ### 8. Update the Archive
 
-- Append the new record to `strength-system/case-library.md`.
+- Write each new formal case to its own file under `strength-system/cases/NNN.md`.
+- Write each new hypothesis note to its own file under `strength-system/hypotheses/NNN.md`.
 - Preserve existing entries; do not rewrite past judgments unless the user explicitly asks for a review or correction.
 - When appropriate, add a brief cross-reference to related earlier cases.
-- Keep formal cases and hypothesis notes in separate sections.
-- After any archive change, run `.codex/skills/unique-advantage-cleaner/scripts/manage_case_library.py reindex --file strength-system/case-library.md --index strength-system/case-index.json`.
+- Treat `strength-system/cases/`, `strength-system/hypotheses/`, and `strength-system/reviews.md` as the source of truth.
+- After any archive change, run `.codex/skills/unique-advantage-cleaner/scripts/manage_case_library.py reindex --root strength-system --index strength-system/case-index.json`.
 
 ### 9. Review Patterns
 
 - When the user asks for a review, compare multiple entries instead of reasoning from one memorable story.
-- Read `strength-system/case-index.json` first for a compact view, then open the full archive only when details matter.
+- Read `strength-system/case-index.json` first for a compact view, then open only the relevant files under `strength-system/cases/` or `strength-system/hypotheses/` when details matter.
 - Base strong conclusions mainly on formal case entries, not hypothesis notes.
 - Use hypothesis notes as prompts for future evidence collection, not as proof.
 - Look for repeated high scores in the same kinds of tasks, not one-off wins.
