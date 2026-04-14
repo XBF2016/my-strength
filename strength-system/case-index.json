@@ -1,9 +1,9 @@
 {
   "version": 3,
-  "generated_at": "2026-04-12T13:10:10.632637+00:00",
+  "generated_at": "2026-04-14T23:23:12.138477+00:00",
   "source": "D:/GitProjects/xiebaofa/my-strength/strength-system",
   "counts": {
-    "formal": 1,
+    "formal": 3,
     "hypothesis": 1
   },
   "formal_cases": [
@@ -18,6 +18,30 @@
         "external_validation": 1
       },
       "judgment": "possible signal"
+    },
+    {
+      "id": "case:002",
+      "title": "排查查询缓慢并优化页面渲染性能",
+      "path": "cases/002.md",
+      "date": "2026-04-14",
+      "scores": {
+        "sustainability": 1,
+        "learning_speed": 1,
+        "external_validation": 2
+      },
+      "judgment": "strong signal"
+    },
+    {
+      "id": "case:003",
+      "title": "推动禅道替代微信做 bug 管理并持续执行",
+      "path": "cases/003.md",
+      "date": "2026-04-15",
+      "scores": {
+        "sustainability": 2,
+        "learning_speed": 1,
+        "external_validation": 2
+      },
+      "judgment": "strong signal"
     }
   ],
   "hypothesis_notes": [
